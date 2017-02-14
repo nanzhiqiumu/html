@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+*, *:before, *:after {
+  moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inconsolata", sans-serif;
+  font-size: 14px;
+  padding: 0 0 40px 0;
+  margin: 0;
+  background-color: #FDFDFD;
+}
+
+.mobile {
+  width: 2.35in;
+  height: 4.87in;
+  margin: 0 auto;
+  background: #222;
+  border-radius: 25px;
+  padding: 50px 5px;
+  box-shadow: 0px 30px 40px rgba(0, 0, 0, 0.2);
+}
+.mobile .mobile-body {
+  background: #fff;
+  height: 100%;
+  padding-top: 40px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.container {
+  overflow-y: scroll;
+  height: 327px;
+  padding: 5px;
+  background: #f6f6f6;
+  line-height: 1.4;
+}
+.container::-webkit-scrollbar {
+  width: 5px;
+}
+.container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.oop {
+  position: relative;
+  z-index: auto;
+  height: 10px;
+  background: -webkit-linear-gradient(309deg, #48ded4 0%, #a026bf 51%, #e82c75 75%);
+  background: linear-gradient(141deg, #48ded4 0%, #a026bf 51%, #e82c75 75%);
+  margin-bottom: 20px;
+}
+
+.header {
+  height: 100vh;
+  display: table;
+  width: 100%;
+}
+
+.heading {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 2.3em;
+  letter-spacing: 5px;
+  text-align: center;
+  font-weight: 200;
+  text-transform: uppercase;
+  color: #333;
+  position: relative;
+}
+.heading small {
+  font-size: 50%;
+}
+
+.navbar {
+  background: #fff;
+  border-radius: 4px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+.navbar .logo {
+  padding: 12px 5px 12px 35px;
+}
+.navbar .logo a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+}
+.navbar button.burger {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 0;
+  background: transparent;
+  padding: 8px 15px;
+  pointer: cursor;
+  outline: none;
+}
+.navbar button.burger span {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #000;
+  margin: 3px 0;
+  border-radius: 4px;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+.navbar button.burger:focus span:first-child {
+  -webkit-transform-origin: 2px 9px;
+          transform-origin: 2px 9px;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.navbar button.burger:focus span:last-child {
+  -webkit-transform-origin: 2px -5px;
+          transform-origin: 2px -5px;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.navbar button.burger:focus + ul {
+  max-height: 500px;
+}
+.navbar ul.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
+}
+.navbar ul.menu > li {
+  display: block;
+  padding: 10px 15px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.navbar ul.menu > li:hover {
+  background: -webkit-linear-gradient(309deg, #48ded4 0%, #a026bf 51%, #e82c75 75%);
+  background: linear-gradient(141deg, #48ded4 0%, #a026bf 51%, #e82c75 75%);
+  color: #fff;
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="oop"></div>
+<div class="header">
+  <h1 class="heading">Pure CSS Navigation<br/><small>Simple & Easy, Scroll down to view</small></h1>
+</div>
+<div class="mobile">
+  <div class="mobile-body">
+    <div class="navbar">
+      <div class="logo"><a href="#">Grey Shades</a></div>
+      <button class="burger" type="button"><span></span><span></span><span></span></button>
+      <ul class="menu">
+        <li>Home</li>
+        <li>Work</li>
+        <li>About</li>
+        <li>Contact Me</li>
+      </ul>
+    </div>
+    <div class="container">
+      <h2>The Elephant Rope</h2>
+      <p>As a man was passing the elephants, he suddenly stopped, confused by the fact that these huge creatures were being held by only a small rope tied to their front leg. No chains, no cages. It was obvious that the elephants could, at anytime, break away from their bonds but for some reason, they did not.</p>
+      <p>He saw a trainer nearby and asked why these animals just stood there and made no attempt to get away. “Well,” trainer said, “when they are very young and much smaller we use the same size rope to tie them and, at that age, it’s enough to hold them. As they grow up, they are conditioned to believe they cannot break away. They believe the rope can still hold them, so they never try to break free.”</p>
+      <p>The man was amazed. These animals could at any time break free from their bonds but because they believed they couldn’t, they were stuck right where they were.</p>
+      <p>Like the elephants, how many of us go through life hanging onto a belief that we cannot do something, simply because we failed at it once before?</p>
+      <p>Failure is part of learning; we should never give up the struggle in life.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

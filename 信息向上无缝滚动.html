@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://www.dowebok.com/demo/2013/69/ -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>简单的jQuery无缝向上滚动效果演示1_dowebok</title>
+<style>
+* { margin: 0; padding: 0;}
+.myscroll { width: 300px; height: 260px; margin: 0 auto; border: 1px solid #ccc; line-height: 26px; font-size: 12px; overflow: hidden;}
+.myscroll li { height: 26px; margin-left: 25px;}
+.myscroll a { color: #333; text-decoration: none;}
+.myscroll a:hover { color: #ED5565; text-decoration: underline;}
+	ul li{
+		list-style:none;
+	}
+</style>
+<script src="无缝信息向上滚动/jquery.min.js.下载"></script>
+<script type="text/javascript" src="无缝信息向上滚动/scroll.js.下载"></script>
+<script type="text/javascript">
+$(function(){
+	$('.myscroll').myScroll({
+		speed: 40, //数值越大，速度越慢
+		rowHeight: 26 //li的高度
+	});
+});
+</script>
+<style>
+@-moz-keyframes nodeInserted{
+	from{opacity:0.99;}
+	to{opacity:1;}
+}
+@-webkit-keyframes nodeInserted
+{from{opacity:0.99;}to{opacity:1;}
+}
+@-o-keyframes nodeInserted{from{opacity:0.99;}
+	to{opacity:1;}
+}@keyframes nodeInserted{
+	from{opacity:0.99;}
+	to{opacity:1;}
+}
+embed,object{
+	animation-duration:.001s;
+	-ms-animation-duration:.001s;
+	-moz-animation-duration:.001s;
+	-webkit-animation-duration:.001s;
+	-o-animation-duration:.001s;
+	animation-name:nodeInserted;
+	-ms-animation-name:nodeInserted;
+	-moz-animation-name:nodeInserted;
+	-webkit-animation-name:nodeInserted;
+	-o-animation-name:nodeInserted;}
+</style>
+</head>
+
+<body>
+<div class="myscroll">
+	<ul style="margin-top: -24px;">
+		<li><a href="http://xiaoshou.netshop168.com">以上价格是否包走微任务？</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">请问怎么计费，cpc还是cpm，多少钱</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">你好。我是智联招聘的杨小姐。可以直接加你吗？有长期配合需求。</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">这个时间是多久呢？</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">请问，多少辆巴士？每天载客多少人？请联系我</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">总计发布多少个媒体？</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">手上楼盘有哪些？700元是一面以你周吗？投放到多少个电梯上？</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">怎么看不到商品介绍</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">保健品类可以放吗？</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">能否发布男性补肾产品广告</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">请问80元普文发布和600元推荐有什么区别吗？可以有不同的截图展示吗？</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">请问下是按GD还是CPC的收费？</a></li>
+		<li><a href="http://xiaoshou.netshop168.com">请问下粉丝是多少？推文是头条吗？</a></li>
+	</ul>
+</div>
+</body>
+</html>

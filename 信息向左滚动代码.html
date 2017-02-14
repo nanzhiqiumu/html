@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+	a{ text-decoration:none}
+</style>
+</head>
+
+<body>
+
+
+<div id="marquee_demo" style="overflow:hidden;width:500px;text-align:center;border:1px solid #ccc">
+	<table cellspacing="0" cellpadding="3" align="center" border="0">
+		<tr>
+			<td id="www_zzjs_net" valign="top">
+				<table width="800" height="100" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+					<td width="180" align="center" style="padding:3px 15px 3px 15px;">1号站长</td>
+					<td width="180" align="center" style="padding:3px 15px 3px 15px;">2号站长</td>
+					<td width="180" align="center" style="padding:3px 15px 3px 15px;">3号站长</td>
+					<td width="180" align="center" style="padding:3px 15px 3px 15px;">4号站长</td>
+					<td width="180" align="center" style="padding:3px 15px 3px 15px;">5号站长</td>
+					<td width="180" align="center" style="padding:3px 15px 3px 15px;">6号站长</td>
+					<td width="180" align="center" style="padding:3px 15px 3px 15px;">7号站长</td>
+					<td width="180" align="center" style="padding:3px 15px 3px 15px;">8号站长</td>
+					</tr>
+				</table>
+			</td>
+			<td id="zzjs_net" valign="top"></td>
+		</tr>
+	</table>
+</div>
+
+<script type="text/javascript">
+var speed=30;
+zzjs_net.innerHTML=www_zzjs_net.innerHTML;
+function marquee(){
+if(marquee_demo.scrollLeft>=www_zzjs_net.scrollWidth){
+marquee_demo.scrollLeft=0;
+}//欢迎来到站长特效网，我们的网址是www.zzjs.net，很好记，zz站长，js就是js特效，本站收集大量高质量js代码，还有许多广告代码下载。
+else{
+marquee_demo.scrollLeft++;
+}
+}//欢迎来到站长特效网，我们的网址是www.zzjs.net，很好记，zz站长，js就是js特效，本站收集大量高质量js代码，还有许多广告代码下载。
+var MyMar=setInterval(marquee,speed);
+marquee_demo.onmouseover=function(){clearInterval(MyMar);}
+marquee_demo.onmouseout=function(){MyMar=setInterval(marquee,speed);}
+</script>
+
+
+
+
+
+
+<!--<div align="center">
+	<table  width="206" cellspacing="0" cellpadding="0" style="border-collapse: collapse" border="1px soild #e5e5e5" height="174"  id="table1">
+		<tr>
+			<td valign="top">
+			   <marquee onmouseover=this.stop() onmouseout=this.start() scrollAmount=1 scrollDelay=10 direction=up height="99%">
+					<table cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+						<tbody>
+							<tr>
+								<td vAlign=top height=163>
+									<P class=f12 style="LINE-HEIGHT: 150%">
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+									<font color=#000033 style="text-align: center; display: block; width: 100%">
+										<a title=123456789 href="#" >123456789</a></br>
+									</font>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</marquee>
+			</td>
+		</tr>
+	</table>
+</div>-->
+
+
+</body>
+</html>
+

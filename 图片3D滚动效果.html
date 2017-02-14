@@ -1,0 +1,29 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery实时监听input value-jq22.com</title>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<style>
+</style>
+</head>
+<body>
+<div class="lia-content">
+  <div class="inputwrapper">
+    <label><span>姓名：</span>
+      <input type="text" name="fullname">
+    </label>
+    <div class="result"></div>
+  </div>
+</div><script>
+$(function() {
+    var $inputwrapper = $('.lia-content .inputwrapper');
+    $inputwrapper.find('input').on('input propertychange',
+    function() {
+        var result = $(this).val();
+        console.log(result);
+        $inputwrapper.find('.result').html(result);
+    });
+})</script>
+</body>
+</html>
