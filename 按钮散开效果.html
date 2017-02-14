@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+    .button{
+	cursor: pointer;
+	text-decoration: none;
+	padding: 10px;
+	color: #fff;
+	border-radius: 10px;
+	position: absolute;
+	top: 100px;
+	left: 48%;
+	background: linear-gradient(#93c, #50c);
+	border:1px solid purple;
+    }
+    .button:after{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	opacity: 0;
+	border:1px solid purple;
+    }
+    .button:hover{
+    	background: linear-gradient(#b5e, #93c);
+    }
+	
+	@-webkit-keyframes boom {
+	0% {
+		opacity: 0
+	}
+	5% {
+		opacity: 1
+	}
+	100% {
+		-webkit-transform: scale(1.3);
+		transform: scale(1.3);
+		opacity: 0
+	}
+}
+@keyframes boom {
+	0% {
+		opacity: 0
+	}
+	5% {
+		opacity: 1
+	}
+	100% {
+		transform: scale(1.3);
+		transform: scale(1.3);
+		opacity: 0
+	}
+}
+
+ .button:hover:after {
+     -webkit-animation: boom 0.5s ease;
+     animation: boom 0.5s ease;
+}
+</style>
+
+</head>
+
+<body>
+<a class="button" href="javascript:void(0);" >Fake Button</a>
+
+</body>
+</html>

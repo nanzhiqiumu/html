@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<style>
+.floatDiv{position: absolute;top: 80px;right: 20px;}
+</style>
+<script src="jquery.js"></script><!-- 注意修改引用路径 -->
+<meta charset="utf-8">
+<title>固定二维码位置随滚动条变动</title>
+</head>
+<script type="text/javascript" src="jquery.js"></script>
+<script language="javascript"> 
+　　//$(document).ready(function(){ 
+　　 $(window).scroll(function (){
+// 让浮动层距离窗口顶部，始终保持80px
+　　 var offsetTop = $(window).scrollTop() + 80 +"px"; 
+　　 $(".floatDiv").animate({top : offsetTop },{ duration:500, queue:false });
+　　 });
+　//　});
+</script>
+<body>
+<div style="height:2000px;"></div> 
+<div class="floatDiv"><img src="images/1-2.png"></div>
+</body>
+</html>
