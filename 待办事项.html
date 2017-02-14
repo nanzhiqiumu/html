@@ -1,0 +1,668 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="jquery.js" type="text/javascript"></script>
+
+<style>
+	
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: #FFB623;
+  color: #333333;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+#TodoApp {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 350px;
+  height: 520px;
+  padding: 20px;
+  border-radius: 5px;
+  background: #EF2155;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+#TodoApp #Header {
+  text-align: center;
+  border-bottom: 3px solid #b60d38;
+  padding: 1em;
+}
+#TodoApp #Header span {
+  opacity: 0.7;
+}
+#TodoApp #Header a {
+  color: #333333;
+  background: #efefef;
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+#TodoApp #Header a:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+#TodoApp #Header span, #TodoApp #Header a {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  line-height: 50px;
+  border-radius: 5px;
+  margin: 0 10px;
+  background: #efefef;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+#TodoApp #TodoList {
+  height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  list-style: none;
+  border-bottom: 3px solid #b60d38;
+}
+#TodoApp #TodoList .todo {
+  background: #efefef;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+#TodoApp #TodoList .todo:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+#TodoApp #TodoList .todo:after {
+  content: '';
+  position: relative;
+  width: 100%;
+  border-bottom: 5px solid #333333;
+  height: 5px;
+}
+#TodoApp #TodoList .todo i {
+  margin-right: 10px;
+}
+#TodoApp #TodoList .todo .fa-times {
+  font-size: 1.5em;
+  position: absolute;
+  right: 0px;
+  -webkit-transform: translate(0, -0.1em);
+          transform: translate(0, -0.1em);
+  color: #e74c3c;
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+#TodoApp #TodoList .todo-completed {
+  text-decoration: line-through;
+}
+#TodoApp #TodoList .todo-enter {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition: all 750ms cubic-bezier(0.87, -0.41, 0.19, 1.44);
+  transition: all 750ms cubic-bezier(0.87, -0.41, 0.19, 1.44);
+}
+#TodoApp #TodoList .todo-enter.todo-enter-active {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+#TodoApp #TodoList .todo-leave {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+  -webkit-transition: all 750ms cubic-bezier(0.87, -0.41, 0.19, 1.44);
+  transition: all 750ms cubic-bezier(0.87, -0.41, 0.19, 1.44);
+}
+#TodoApp #TodoList .todo-leave.todo-leave-active {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+#TodoApp #AddTodo {
+  text-align: center;
+  margin-top: 1em;
+}
+#TodoApp #AddTodo input {
+  display: block;
+  border: 0;
+  background: #efefef;
+  font-size: 1.2em;
+  padding: 0.5em;
+  width: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+#TodoApp #AddTodo input:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+#TodoApp #AddTodo button {
+  background: #1ABC9C;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 70px;
+  height: 70px;
+  font-size: 35px;
+  margin: 20px 0;
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+#TodoApp #AddTodo button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.todo {
+  line-height: 1.5;
+  position: relative;
+  padding: 0 2.5rem 0 .75rem;
+  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.todo:after {
+  font-family: FontAwesome;
+  content: "\f00c";
+  position: absolute;
+  right: .75rem;
+  color: #2ecc71;
+  opacity: 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: opacity, 0.25s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform;
+  transition: opacity, 0.25s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform;
+  transition: transform, opacity, 0.25s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: transform, opacity, 0.25s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform;
+}
+.todo + .todo {
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+.todo + .todo:before {
+  content: '';
+  background: #e8ebed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 2px;
+}
+.todo__content {
+  position: relative;
+  opacity: 1;
+  text-transform: capitalize;
+  cursor: pointer;
+  -webkit-transition: opacity 0.25s ease-out;
+  transition: opacity 0.25s ease-out;
+}
+.todo__content:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: calc( 100% + .5em );
+  left: -.25em;
+  height: 2px;
+  top: 50%;
+  border-radius: 1px;
+  background: #2E2E2E;
+  -webkit-transform-origin: center right;
+          transform-origin: center right;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1), -webkit-transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.todo.todo--completed:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.todo.todo--completed .todo__content {
+  opacity: 0.5;
+}
+.todo.todo--completed .todo__content:after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: center left;
+          transform-origin: center left;
+}
+
+	
+</style>
+
+</head>
+
+<body>
+
+<link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" media="screen">
+<script src="https://npmcdn.com/react@15.1.0/dist/react-with-addons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.3/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/2.0.0/ReactRouter.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/4.0.0/react-redux.js"></script>
+<div id="root"></div>
+
+
+<script>
+	
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+console.clear();
+
+/************************************
+* IMPORTS
+************************************/
+
+var _React = React;
+var Component = _React.Component;
+var _uuid = uuid;
+var v4 = _uuid.v4;
+var _Redux = Redux;
+var createStore = _Redux.createStore;
+var combineReducers = _Redux.combineReducers;
+var _ReactRedux = ReactRedux;
+var connect = _ReactRedux.connect;
+var Provider = _ReactRedux.Provider;
+
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+/************************************
+* ACTION CREATORS
+************************************/
+
+// These are actions that will be passed to store.dispatch()
+var addTodo = function addTodo(text) {
+  return {
+    type: 'ADD_TODO',
+    id: v4(),
+    text: text
+  };
+};
+
+var toggleTodo = function toggleTodo(id) {
+  return {
+    type: 'TOGGLE_TODO',
+    id: id
+  };
+};
+
+var removeTodo = function removeTodo(id) {
+  return {
+    type: 'REMOVE_TODO',
+    id: id
+  };
+};
+
+var setVisibilityFilter = function setVisibilityFilter(filter) {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter: filter
+  };
+};
+
+/************************************
+* REDUCERS 
+************************************/
+
+/* todos ***************************/
+var todos = function todos() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'ADD_TODO':
+      // Return the current array and use todo reducer to add a new todo object to the end. 'undefined' is passed because a new todo doesn't require state, and 'ADD_TODO' is passed as the action.
+      return [].concat(state, [
+      //
+      todo(undefined, action)]);
+    case 'TOGGLE_TODO':
+      // Take each item in todos and pass it through the todo reducer with 'TOGGLE_TODO' as the action.
+      return state.map(function (t) {
+        return todo(t, action);
+      });
+    case 'REMOVE_TODO':
+      var index = undefined;
+      state.map(function (t, i) {
+        if (t.id === action.id) {
+          index = i;
+        }
+      });
+      return [].concat(state.slice(0, index), state.slice(index + 1));
+    default:
+      return state;
+  }
+};
+
+var todo = function todo(state, action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      // Return a new todo with these values. It then gets added to the array used in 'ADD_TODO' in the todos reducer.
+      return {
+        id: action.id,
+        text: action.text,
+        completed: false
+      };
+    case 'TOGGLE_TODO':
+      // Return the original state if the IDs DON'T match.
+      if (state.id !== action.id) {
+        return state;
+      }
+      return _extends({}, state, {
+        completed: !state.completed
+      });
+    default:
+      return state;
+  }
+};
+/* visibilityFilter ****************/
+var visibilityFilter = function visibilityFilter() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? 'SHOW_ALL' : arguments[0];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+
+var todoApp = combineReducers({
+  todos: todos,
+  visibilityFilter: visibilityFilter
+});
+
+/************************************
+* PRESENTATIONAL COMPONENTS
+************************************/
+
+/* <Todo /> ************************/
+var Todo = function Todo(_ref) {
+  var onClick = _ref.onClick;
+  var completed = _ref.completed;
+  var text = _ref.text;
+  var id = _ref.id;
+  return React.createElement(
+    'li',
+    {
+      onClick: onClick,
+      className: "todo" + (completed ? " todo-completed" : "")
+    },
+    React.createElement('i', { className: "fa " + (completed ? 'fa-dot-circle-o' : 'fa-circle-o') }),
+    text,
+    React.createElement(RemoveButton, { value: id })
+  );
+};
+
+/* <TodoList /> ********************/
+var TodoList = function TodoList(_ref2) {
+  var todos = _ref2.todos;
+  var onTodoClick = _ref2.onTodoClick;
+
+  return React.createElement(
+    ReactCSSTransitionGroup,
+    {
+      id: 'TodoList',
+      component: 'ul',
+      transitionName: 'todo',
+      transitionEnterTimeout: 500,
+      transitionLeaveTimeout: 500
+    },
+    todos.map(function (todo) {
+      return React.createElement(Todo, _extends({
+        id: todo.id,
+        key: todo.id
+      }, todo, {
+        onClick: function onClick() {
+          return onTodoClick(todo.id);
+        }
+      }));
+    })
+  );
+};
+
+/* <Link /> ************************/
+var Link = function Link(_ref3) {
+  var active = _ref3.active;
+  var children = _ref3.children;
+  var _onClick = _ref3.onClick;
+
+  if (active) {
+    return React.createElement(
+      'span',
+      null,
+      children
+    );
+  }
+  return React.createElement(
+    'a',
+    { href: '#',
+      onClick: function onClick(e) {
+        e.preventDefault();
+        _onClick();
+      } },
+    children
+  );
+};
+
+/* <Header /> **********************/
+var Header = function Header() {
+  return React.createElement(
+    'p',
+    { id: 'Header' },
+    React.createElement(
+      FilterLink,
+      {
+        filter: 'SHOW_ALL' },
+      React.createElement('i', { className: 'fa fa-list' })
+    ),
+    React.createElement(
+      FilterLink,
+      {
+        filter: 'SHOW_ACTIVE' },
+      React.createElement('i', { className: 'fa fa-circle-o' })
+    ),
+    React.createElement(
+      FilterLink,
+      {
+        filter: 'SHOW_COMPLETED' },
+      React.createElement('i', { className: 'fa fa-dot-circle-o' })
+    )
+  );
+};
+
+/* <TodoApp /> *********************/
+var TodoApp = function TodoApp() {
+  return React.createElement(
+    'div',
+    { id: 'TodoApp' },
+    React.createElement(Header, null),
+    React.createElement(VisibleTodoList, null),
+    React.createElement(AddTodo, null)
+  );
+};
+
+/************************************
+* CONTAINER COMPONENTS
+************************************/
+
+/* <VisibleTodoList /> *************/
+
+// Function to ascertain which Todos should be shown.
+var getVisibleTodos = function getVisibleTodos(todos, filter) {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_COMPLETED':
+      // Return a filtered array of items whose completed value = true
+      return todos.filter(function (t) {
+        return t.completed;
+      });
+    case 'SHOW_ACTIVE':
+      // Return a filtered array of items whose completed value = false
+      return todos.filter(function (t) {
+        return !t.completed;
+      });
+  }
+};
+// Gives <VisibleTodoList /> the state that it needs
+var mapStateToTodoListProps = function mapStateToTodoListProps(state) {
+  return {
+    todos: getVisibleTodos(
+    // Current todos and visibilityFilter
+    state.todos, state.visibilityFilter)
+  };
+};
+// Gives <VisibleTodoList /> the props that it needs
+var mapDispatchToTodoListProps = function mapDispatchToTodoListProps(dispatch) {
+  return {
+    onTodoClick: function onTodoClick(id) {
+      dispatch(toggleTodo(id));
+    }
+  };
+};
+// Creates <VisibleTodoList />
+var VisibleTodoList = connect(mapStateToTodoListProps, mapDispatchToTodoListProps)(TodoList);
+
+/* <FilterLink /> ******************/
+
+// Gives <FilterLink /> the state that it needs
+var mapStateToLinkProps = function mapStateToLinkProps(state, ownProps) {
+  return {
+    active: ownProps.filter === state.visibilityFilter
+  };
+};
+// Gives <FilterLink /> the props that it needs
+var mapDispatchToLinkProps = function mapDispatchToLinkProps(dispatch, ownProps) {
+  return {
+    onClick: function onClick() {
+      dispatch(setVisibilityFilter(ownProps.filter));
+    }
+  };
+};
+var FilterLink = connect(mapStateToLinkProps, mapDispatchToLinkProps)(Link);
+
+/************************************
+* OTHER COMPONENTS
+************************************/
+
+/* <AddTodo /> *********************/
+var AddTodo = function AddTodo(_ref4) {
+  var dispatch = _ref4.dispatch;
+
+  var input = undefined;
+  return React.createElement(
+    'form',
+    { id: 'AddTodo', className: 'add-todo', onSubmit: function onSubmit(e) {
+        e.preventDefault();
+        if (input.value.length > 0) {
+          dispatch(addTodo(input.value));
+          input.value = '';
+        }
+      } },
+    React.createElement('input', { type: 'text', ref: function ref(node) {
+        input = node;
+      }, placeholder: 'Add a todo...' }),
+    React.createElement(
+      'button',
+      { type: 'submit' },
+      React.createElement('i', { className: 'fa fa-plus' })
+    )
+  );
+};
+// Connect() without any parameters creates a container that doesn't subscribe to the store, but will pass dispatch to the component that it wraps.
+AddTodo = connect()(AddTodo);
+
+var RemoveButton = function RemoveButton(_ref5) {
+  var value = _ref5.value;
+  var dispatch = _ref5.dispatch;
+
+  return React.createElement('i', { className: 'fa fa-times',
+    onClick: function onClick() {
+      dispatch(removeTodo(value));
+    } });
+};
+RemoveButton = connect()(RemoveButton);
+
+/************************************
+* REACT RENDER
+************************************/
+
+var configureStore = function configureStore() {
+  var persistedState = loadState();
+  var store = createStore(todoApp, persistedState);
+
+  store.subscribe(_.throttle(function () {
+    saveState({
+      todos: store.getState().todos
+    });
+  }, 1000));
+
+  return store;
+};
+
+var Root = function Root(_ref6) {
+  var store = _ref6.store;
+  return React.createElement(
+    Provider,
+    { store: store },
+    React.createElement(TodoApp, null)
+  );
+};
+
+var loadState = function loadState() {
+  try {
+    var serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
+
+var saveState = function saveState(state) {
+  try {
+    var serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (err) {
+    // Ignore errors.
+  }
+};
+
+var store = configureStore();
+
+ReactDOM.render(React.createElement(Root, { store: store }), document.getElementById('root'));
+
+</script>
+</body>
+</html>

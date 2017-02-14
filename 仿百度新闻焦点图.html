@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<script src="jquery.js"></script>
+<style>
+body,dl,dd{margin:0;}
+.container{width:480px;height:300px;overflow:hidden;position:relative;}
+.container img{float:left;}
+.container dl{background-image:none;position:absolute;bottom:0;left:0;width:98%;height:30px;line-height:30px;color:white;padding-left:2%}
+.arrow_left,.arrow_right{display:block;width:41px;height:41px;position:absolute;top:50%;margin-top:-20px;cursor:pointer;}
+.arrow_left{background-image:none;left:0;}
+.arrow_right{background-image:none;right:0;}
+</style>
+<meta charset="utf-8">
+<title>仿百度新闻焦点图</title>
+</head>
+<body>
+<div class="container">
+	<img src="images/bg.jpg">
+    <img src="images/bg.png">
+    <img src="images/bg.png">
+    <img src="images/bg.png">
+    <img src="images/bg.png">
+    <img src="images/bg.png">
+    <dl>
+    	<dd>新闻文本显示区-第1条新闻</dd>
+        <dd>新闻文本显示区-第2条新闻</dd>
+        <dd>新闻文本显示区-第3条新闻</dd>
+        <dd>新闻文本显示区-第4条新闻</dd>
+        <dd>新闻文本显示区-第5条新闻</dd>
+        <dd>新闻文本显示区-第6条新闻</dd>
+    </dl>
+    <span class="arrow_left" onselectstart="return false"></span>
+    <span class="arrow_right" onselectstart="return false"></span>
+</div>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script>
+/*初始*/
+$(".container img,.container dd").hide();
+$(".container img:eq(0),.container dd:eq(0)").show();
+/*定时器函数*/
+var n = 0;
+function changeImg(){
+	if(n<$(".container img").length-1){
+	n=n+1;
+	}else{
+	n=0;	
+	}
+	$(".container img,.container dd").hide();
+	$(".container img:eq("+n+"),.container dd:eq("+n+")").show();	
+}
+var timer = setInterval(changeImg,2000);
+$(".container").hover(function(){
+	clearInterval(timer);	
+},function(){
+	timer = setInterval(changeImg,2000);
+})
+/*箭头控制*/
+$(".arrow_left").click(function(){
+	if(n>0){n=n-1}else{n=$(".container img").length-1}
+	$(".container img,.container dd").hide();
+	$(".container img:eq("+n+"),.container dd:eq("+n+")").show();	
+})
+$(".arrow_right").click(function(){	
+	if(n<$(".container img").length-1){n=n+1;}else{n=0}
+	$(".container img,.container dd").hide();
+	$(".container img:eq("+n+"),.container dd:eq("+n+")").show();
+})
+</script>
+</body>
+</html>
