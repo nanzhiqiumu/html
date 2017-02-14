@@ -1,0 +1,291 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:700);
+html, body {
+	height: 100%;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    padding: 0;
+    margin: 0;
+    overflow:hidden;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background: #282537;
+    background-image: -webkit-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+    background-image: radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+  background-image:-moz-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+  cursor: move;
+  -webkit-user-select:none;
+     -moz-user-select:none;
+      -ms-user-select:none;
+          user-select:none;
+}
+svg{
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: #282537;
+  background-image: -webkit-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+  background-image: radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+  box-shadow:inset 4px 4px 8px 8px hsla(0,5%,5%,.07);
+  border-radius:5px;
+}
+.svg{
+  width:100%;
+  text-align:center;
+  margin-top:2%;
+}
+.input{
+  padding:2em;
+}
+
+p{
+  text-align:left;
+  width:90%;
+  line-height:1.5em;
+  padding:.5em;
+}
+form,p{
+  color:hsla(231, 5%, 85%, 1);
+}	
+</style>
+</head>
+
+<body>
+
+<div class = 'svg'>
+<svg width="465" height="465" viewBox = '-20 0 465 465'>
+    <path id="p" d="M 100 350 L 200 50 300 350 Z" stroke="hsla(231, 5%, 85%, 1)" stroke-width="1" fill="none" />
+</svg>
+  <br />
+<div class = 'input'>
+<form oninput="val.value=ptrng.value">
+<label>#Points  <input id="ptrng" type="range" min="0" max="20" step="1"/> 
+<output name="val" for="ptrng"></output></label>
+ </form>
+  </div>
+<p>*Note:<br>There are boundary issues within the container.<br>The object may get lost when it hits certain points.<br>Just adjust the slider && it will return into view.</p>
+</div>
+  
+<script src="jquery.js" type="text/javascript"></script>  
+<script>
+	var ss = 460; //svg size
+var p = document.getElementById('p'),
+  poly,
+  $,
+  FPS = 60;
+
+function Pt(x, y) {
+  this.x = x || 0;
+  this.y = y || 0;
+}
+
+Pt.dist = function(a, b) {
+  return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
+};
+
+function Rect(x, y, w, h) {
+    this.x = 0;
+    this.y = 0;
+    this.w = w || 0; //width
+    this.h = h || 0; //height
+    this.l = x; //left
+    this.r = x + w; //right
+    this.t = y; //top
+    this.b = y + h; //bottom
+  }
+  //verlet point
+function vPt(x, y) {
+    this.x = x || 0;
+    this.y = y || 0;
+    this.px = this.x;
+    this.py = this.y;
+  }
+  //update
+vPt.prototype.upd = function() {
+    var tmpX = this.x,
+      tmpY = this.y;
+    this.x += this.getX();
+    this.y += this.getY();
+    this.px = tmpX;
+    this.py = tmpY;
+  }
+  //set position
+vPt.prototype.setPos = function(x, y) {
+    this.x = this.px = x;
+    this.y = this.py = y;
+  }
+  //contain
+vPt.prototype.cont = function(rect) {
+    this.x = Math.max(rect.l, Math.min(rect.r, this.x));
+    this.y = Math.max(rect.t, Math.min(rect.b, this.y));
+  }
+  //set verlet x
+vPt.prototype.setX = function(val) {
+    this.px = this.x - val;
+  }
+  //get verlet x
+vPt.prototype.getX = function() {
+    return this.x - this.px;
+  }
+  //set verlet y
+vPt.prototype.setY = function(val) {
+    this.py = this.y - val;
+  }
+  //get verlet y
+vPt.prototype.getY = function() {
+    return this.y - this.py;
+  }
+  //verlet lines
+function vLine(ptA, ptB, k, length) {
+    this.ptA = ptA;
+    this.ptB = ptB;
+    this.k = k || 0.5;
+    this.length = length || Pt.dist(ptA, ptB);
+  }
+  //update lines
+vLine.prototype.upd = function() {
+  var dx = this.ptB.x - this.ptA.x,
+    dy = this.ptB.y - this.ptA.y,
+    dist = Math.sqrt(dx * dx + dy * dy),
+    diff = (this.length - dist) / dist,
+    offX = diff * dx * this.k,
+    offY = diff * dy * this.k;
+  this.ptA.x -= offX;
+  this.ptA.y -= offY;
+  this.ptB.x += offX;
+  this.ptB.y += offY;
+}
+
+//polygon (point, vertex, size, var k)
+function Poly(pt, vert, size, k) {
+  this.vert = vert;
+  this.pts = [];
+  this.lines = [];
+
+  this.vx = 0.2;
+
+  for (var v = 0; v < 2 * Math.PI; v += 2 * Math.PI / vert) {
+    this.pts.push(
+      new vPt(Math.cos(v) * size + pt.x, Math.sin(v) * size + pt.y)
+    );
+  }
+
+  for (var i = 0, n = this.pts.length; i < n; i++) {
+    pt = this.pts[i];
+
+    for (var j = 0, m = this.pts.length; j < m; j++) {
+      if (i !== j) {
+        this.lines.push(
+          new vLine(pt, this.pts[j], k)
+        );
+      }
+    }
+  }
+}
+
+Poly.prototype.upd = function() {
+  var pt,
+    line,
+    i = 0,
+    n = this.pts.length;
+
+  for (; i < n; i++) {
+    pt = this.pts[i];
+    pt.y += this.vx;
+    pt.upd();
+    pt.cont($);
+  }
+
+  i = 0;
+  n = this.lines.length;
+  for (; i < n; i++) {
+    line = this.lines[i];
+    line.upd();
+  }
+}
+
+Poly.prototype.draw = function() {
+  var pt,
+    line,
+    i,
+    n;
+
+  var d = 'M ' + this.pts[0].x + ' ' + this.pts[0].y + ' L ';
+
+  i = 0;
+  n = this.pts.length;
+  for (; i < n; i++) {
+    pt = this.pts[i];
+    d += ' ' + pt.x + ' ' + pt.y;
+  }
+
+  d += ' Q ';
+
+  i = 0;
+  n = this.lines.length;
+
+  for (; i < n; i++) {
+    line = this.lines[i];
+    d += ' ' + line.ptA.x + ' ' + line.ptA.y;
+    d += ' ' + line.ptB.x + ' ' + line.ptB.y;
+  }
+
+  d += ' Z';
+  p.setAttribute('d', d);
+}
+var ms = {
+  msup: 'mouseup',
+  msmv: 'mousemove',
+  msdn: 'mousedown'
+}
+document.addEventListener(ms.msdn, onMouseDown);
+document.addEventListener(ms.msup, onMouseUp);
+document.addEventListener(ms.msmv, onMouseMove);
+
+var msdn,
+  prevX = 0,
+  prevY = 0;
+
+function onMouseDown(e) {
+  msdn = true;
+  prevX = e.clientX;
+  prevY = e.clientY;
+}
+
+function onMouseUp(e) {
+  msdn = false;
+}
+
+function onMouseMove(e) {
+  if (msdn) {
+    for (var i = 0; i < poly.pts.length; i++) {
+      poly.pts[i].x += (e.clientX - prevX) / 8;
+      poly.pts[i].y += (e.clientY - prevY) / 8;
+    }
+    prevX = e.clientX;
+    prevY = e.clientY;
+  }
+}
+
+$ = new Rect(0, 0, ss, ss);
+poly = new Poly(new Pt(220, 90), 9, 80, 0.025);
+
+function loop() {
+  poly.upd();
+  poly.draw();
+}
+
+setInterval(loop, 1000 / FPS);
+
+document.getElementById('ptrng').addEventListener('change', function(e) {
+  poly = new Poly(new Pt(220, 90), e.currentTarget.value, 80, 0.025);
+});
+</script>
+</body>
+</html>
