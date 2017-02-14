@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Gentium+Book+Basic);
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@-webkit-keyframes leafLeft {
+  0% {
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: perspective(1000px) rotateY(0deg);
+            transform: perspective(1000px) rotateY(0deg);
+  }
+  100% {
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: perspective(1000px) rotateY(-180deg);
+            transform: perspective(1000px) rotateY(-180deg);
+  }
+}
+@keyframes leafLeft {
+  0% {
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: perspective(1000px) rotateY(0deg);
+            transform: perspective(1000px) rotateY(0deg);
+  }
+  100% {
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: perspective(1000px) rotateY(-180deg);
+            transform: perspective(1000px) rotateY(-180deg);
+  }
+}
+body {
+  background: #D5D6BC;
+  min-width: 38em;
+}
+center {
+  margin: 1em auto;
+  font: 400 1em / 1.2 'Gentium Book Basic';
+}
+p + p {
+  margin-top: 1em;
+}
+.book {
+  background: -webkit-linear-gradient(top, #60584A, #26231e);
+  background: linear-gradient(to bottom, #60584A, #26231e);
+  height: 24em;
+  width: 34em;
+  margin: 1em auto;
+  box-shadow: 0 1em 3em rgba(0, 0, 0, 0.3);
+  padding: 1em;
+}
+.book:hover {
+  cursor: pointer;
+}
+.book .pages-container {
+  background: #D5D6BC;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.book .pages-container .page {
+  position: absolute;
+  height: inherit;
+  width: 50%;
+  padding: 1em;
+  font: 400 1em / 1.2 'Gentium Book Basic';
+}
+.book .pages-container .page:first-of-type,
+.book .pages-container .page.back {
+  background: -webkit-linear-gradient(right, #978c79, #D5D6BC 20%, #FFFFFF 100%);
+  background: linear-gradient(to left, #978c79, #D5D6BC 20%, #FFFFFF 100%);
+}
+.book .pages-container .page:last-of-type,
+.book .pages-container .page.front {
+  background: -webkit-linear-gradient(left, #978c79, #D5D6BC 20%, #FFFFFF 100%);
+  background: linear-gradient(to right, #978c79, #D5D6BC 20%, #FFFFFF 100%);
+  margin-left: 50%;
+}
+.book .pages-container .page.duplex {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  margin-left: 50%;
+  z-index: 1;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+.book .pages-container .page.duplex.leaf-left {
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  -webkit-animation-name: leafLeft;
+          animation-name: leafLeft;
+}
+.book .pages-container .page.duplex.leaf-left .back {
+  background: -webkit-linear-gradient(right, #978c79, #D5D6BC 20%, #FFFFFF 100%);
+  background: linear-gradient(to left, #978c79, #D5D6BC 20%, #FFFFFF 100%);
+}
+.book .pages-container .page.duplex.leaf-right {
+  -webkit-animation-direction: reverse;
+          animation-direction: reverse;
+  -webkit-animation-name: leafLeft;
+          animation-name: leafLeft;
+}
+.book .pages-container .page.duplex.leaf-right .back {
+  background: -webkit-linear-gradient(right, #978c79, #D5D6BC 20%, #FFFFFF 100%);
+  background: linear-gradient(to left, #978c79, #D5D6BC 20%, #FFFFFF 100%);
+}
+.book .pages-container .page.duplex .front,
+.book .pages-container .page.duplex .back {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  width: 100%;
+  margin: 0;
+}
+.book .pages-container .page.duplex .back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+	
+</style>
+</head>
+
+<body>
+
+<center>Click on book</center>
+
+<div class="book" id="test-book">
+    <div class="pages-container">
+        <div class="page">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi rem repellat fuga numquam laboriosam hic quis quia commodi ex recusandae ut architecto, quod nisi, delectus ea error officiis, id doloremque.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae necessitatibus aut officia voluptates, ex repellendus reprehenderit! Minima repellat fugiat rem fugit incidunt placeat praesentium, saepe voluptates magni temporibus illo.
+                Sequi?</p>
+        </div>
+        <div class="page duplex" id="test-duplex">
+            <div class="page front">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, esse.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error aut reprehenderit maxime provident! Vel eveniet nisi ab molestias nesciunt quasi aperiam, omnis molestiae nemo exercitationem vitae id quis alias, assumenda tempore neque
+                    itaque tempora facilis placeat incidunt eaque at. Expedita maxime eum, debitis voluptatem. Deleniti!</p>
+            </div>
+            <div class="page back">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti distinctio maiores ratione animi vero, eius ipsa eum perferendis deleniti totam!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed impedit numquam quibusdam nesciunt sint eius eaque laudantium officiis inventore veritatis!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis est pariatur, ducimus voluptatem ut sint!</p>
+            </div>
+        </div>
+        <div class="page">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore beatae deleniti asperiores, assumenda facere alias debitis amet nemo sequi quisquam, fugit placeat illo cum saepe unde dolorem fuga neque omnis.</p>
+            <p>***</p>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="jquery.js" type="text/javascript"></script>
+<script>
+document.getElementById('test-book').addEventListener('click', (function() {
+    var state = 1;
+
+    return function() {
+        var duplex = document.getElementById('test-duplex');
+
+        switch (state) {
+            case 1:
+                duplex.classList.remove('leaf-right');
+                duplex.classList.remove('leaf-left');
+                duplex.offsetWidth = duplex.offsetWidth;
+                duplex.classList.add('leaf-left');
+                state = 2;
+                break;
+            case 2:
+                duplex.classList.remove('leaf-left');
+                duplex.classList.remove('leaf-right');
+                duplex.offsetWidth = duplex.offsetWidth;
+                duplex.classList.add('leaf-right');
+                state = 1;
+                break;
+        }
+    }
+})());	
+</script>
+</body>
+</html>
