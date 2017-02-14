@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+a.demo {
+    display:block;
+    line-height: 30px;
+    width: 80px;
+    text-align: center;
+    margin: 100px auto;
+    background: #80CB1B;
+    font-size: 16px;
+    padding: 8px 19px 9px;
+    -moz-box-shadow: 0 0 5px #343434;
+    -webkit-box-shadow: 0 0 5px #fff;
+    box-shadow: 0 0 5px #343434;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes 'wobble' {
+    0% {
+      left: 100px;
+    }
+    40% {
+      left: 150px;
+    }
+    60% {
+      left: 75px;
+    }
+    100% {
+      left: 100px;
+    }
+}
+
+@-webkit-keyframes 'breathingLight' {
+        from {
+                background-color: #80CB1B;
+                -webkit-box-shadow:0 0 5px #ccc;
+        }
+	50% {
+                background-color: #B7F20F;
+                -webkit-box-shadow: 0 0 10px #398B08;
+        }
+	to {
+                background-color: #80CB1B;
+                -webkit-box-shadow:0 0 5px #ccc;
+        }
+}
+
+a.demo {
+	-webkit-animation-name: breathingLight; /*为元素指定要执行的动画名*/
+	-webkit-animation-duration: 3s;  /*一次动画执行的时间，这里设定为了3秒*/
+	-webkit-animation-iteration-count: infinite;  /*元素执行动画的次数，默认值是1次，也可以指定次数，这里的 infinite 顾名思义就是无限地循环执行*/
+}
+/*
+属性               	        可用值	                描述
+animation-name      	    name	                动画名
+animation-duration  	    time	                动画执行的时间
+animation-timing-function	ease、linear 等	        动画函数
+animation-iteration-count	infinite、number	        重复次数
+animation-direction	        normal | alternate	    反转动画方向
+animation-delay	            time	                延时
+
+*/
+
+
+</style>
+</head>
+
+<body>
+<a href="#" class="demo">Button</a>
+
+
+</body>
+</html>

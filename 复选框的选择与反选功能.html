@@ -1,0 +1,145 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery制作图片旋转效果-jq22.com</title>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<style>
+</style>
+</head>
+<body>
+<div>
+    <div class="holder" style="width:550px;height:300px;position:relative;"> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+    </div>
+    <div class="holder2" style="width:500px;height:400px;margin-top:50px;position:relative;"> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+		<img src="http://www.jq22.com/img/cs/500x300.png" /> 
+    </div>
+</div><script>
+// JavaScript Document
+(function($) {
+    $.fn.scroll3d = function(options) {
+        var opts = $.extend({},
+        $.fn.scroll3d.defaults, options);
+        var $this = $(this);
+        var o = $.meta ? $.extend({},
+        opts, $(this).data()) : opts;
+        var radius = o.radius;
+        var timer = 0;
+        var xx = 0;
+        var speed = o.speed;
+        var dir = o.direction;
+        $(this).hide();
+
+        return this.each(function() {
+            var $img = $(this).find('img').css({
+                'position': 'absolute'
+            }),
+            num = 0;
+            var imgnum = $img.length;
+            var holderwidth = $(this).width(),
+            holderheight = $(this).height();
+
+            $img.each(function(i) {
+                var imgsrc = $(this).attr("src");
+                $(this).data({
+                    "index": i
+                });
+
+                $(this).load(function() {++num;
+                    if (num == imgnum) {
+                        $this.show();
+                    }
+                }).attr({
+                    "src": imgsrc
+                });
+
+                var thisleft = -(o.radius) * Math.sin((360 / imgnum) * $(this).data("index") * (Math.PI * 2 / 360)) + (holderwidth / 2);
+                var thiszindex = 360 / imgnum * $(this).data("index") > 180 ? 360 / imgnum * $(this).data("index") - 360 : -360 / imgnum * $(this).data("index");
+                var thisopacity = 360 / imgnum * $(this).data("index") <= 180 ? (180 - 360 / imgnum * $(this).data("index")) / 180 * 1.2 : (360 / imgnum * $(this).data("index") - 180) / 180 * 1.2;
+
+                $(this).attr({
+                    "nowdeg": (360 / imgnum) * $(this).data("index")
+                });
+
+                $(this).css({
+                    "left": thisleft - (o.width * thisopacity) / 2 + "px",
+                    "top": (holderheight / 2) - o.width * (thisopacity + 1) / 4,
+                    "z-index": thiszindex + 180,
+                    "opacity": (thisopacity + 0.2) / 1.2,
+                    "width": o.width * (thisopacity + 1) / 2,
+                    "height": o.height * (thisopacity + 1) / 2
+                });
+            });
+
+            function scrollimg() {
+                $img.each(function() {
+                    var thisdeg = $(this).attr('nowdeg');
+                    var thisleft;
+                    xx = thisdeg;
+
+                    if (dir == 'left') {
+                        thisleft = -(o.radius) * Math.sin(xx * (Math.PI * 2 / 360)) + (holderwidth / 2);
+                    } else {
+                        thisleft = (o.radius) * Math.sin(xx * (Math.PI * 2 / 360)) + (holderwidth / 2);
+                    }
+
+                    var thiszindex = xx > 180 ? xx - 360 : -xx;
+                    var thisopacity = xx <= 180 ? (180 - xx) / 180 : ($(this).attr('nowdeg') - 180) / 180;
+
+                    $(this).css({
+                        "left": thisleft - (o.width * thisopacity) / 2 + "px",
+                        "top": (holderheight / 2) - o.width * (thisopacity + 1) / 4,
+                        "z-index": thiszindex + 180,
+                        "opacity": (thisopacity + 0.2) / 1.2,
+                        "width": o.width * (thisopacity + 1) / 2,
+                        "height": o.height * (thisopacity + 1) / 2
+                    });
+
+                    xx++;
+                    if (xx > 360) xx = 0;
+                    $(this).attr({
+                        "nowdeg": xx
+                    });
+                });
+            };
+
+            var tt = setInterval(scrollimg, speed);
+
+            $img.hover(function() {
+                clearInterval(tt);
+            },
+            function() {
+                tt = setInterval(scrollimg, speed);
+            });
+
+        });
+    };
+
+    $.fn.scroll3d.defaults = {
+        speed: 25,
+        radius: 300,
+        width: 200,
+        height: 150,
+        direction: 'left'
+    }
+})(jQuery);
+
+ $('.holder').scroll3d();
+  $('.holder2').scroll3d({
+    speed: 5,
+    radius: 200,
+    width: 200,
+    height: 150,
+    direction: 'left'
+  });</script>
+</body>
+</html>
