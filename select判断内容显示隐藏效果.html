@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<form name="doublecombo">
+
+<select id="selectid" name="example" size="1">
+<option value='1'>应用技术开发网站</option>
+<option value='2'>国内JavaScript技术网站</option>
+<option value='3'>国外的著名搜索引擎</option>
+</select>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+
+<style>
+	*{
+		margin: 0;
+		padding: 0
+	}
+	ul{
+		width: 300px;
+	}
+	ul li{
+		list-style: none;
+		width: 300px;
+		float: left
+	}
+	ul li .input{
+		float: right;
+		width: 180px;
+	}
+	.hidden {
+		display: none;
+	}
+</style>
+<ul class="hidden" id='select1'>
+	<li>
+		<span>待办工作：</span><input class="input" type="text" placeholder="****************">
+	</li>	
+	<li>
+		<span></span><textarea class="input"></textarea>
+	</li>
+	<li>
+		<span>详情：</span><input class="input" type="text" placeholder="*************">
+	</li>
+
+</ul>
+
+<ul class="hidden" id='select2'>
+	<li>
+		<span>23232：</span><input class="input" type="text" placeholder="****************">
+	</li>	
+	<li>
+		<span></span><textarea class="input"></textarea>
+	</li>
+	<li>
+		<span>详情：</span><input class="input" type="text" placeholder="*************">
+	</li>
+
+</ul>
+
+
+<script>  
+$("#selectid").change ( function() {
+	var selectid = $(this).val();
+	if( selectid == 1 )
+	{
+		$(".hidden").hide();
+		$("#select" + selectid ).show();
+	}
+	else if( selectid == 2 ) {
+		$(".hidden").hide();
+		$("#select" + selectid ).show();
+	}
+	else
+	{
+		$(".box").hide();
+	}
+
+} );
+</script> 
+</form>
+
+
+</body>
+</html>
