@@ -68,20 +68,8 @@
 <script>  
 $("#selectid").change ( function() {
 	var selectid = $(this).val();
-	if( selectid == 1 )
-	{
-		$(".hidden").hide();
-		$("#select" + selectid ).show();
-	}
-	else if( selectid == 2 ) {
-		$(".hidden").hide();
-		$("#select" + selectid ).show();
-	}
-	else
-	{
-		$(".hidden").hide();
-	}
-
+	$(".hidden").hide();
+	$("#select" + selectid ).show();
 } );
 </script> 
 </form>
