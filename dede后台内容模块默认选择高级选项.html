@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<!--dede后台-->
+<script>
+  //根据url参数，切换到"高级参数"选项卡
+  var refuse = "<?php echo $_GET['refuse']; ?>";
+  if( refuse != '')
+  {
+    $(function(){
+      ShowItem2();
+      $("#arcrank").find("option[text='拒绝通过']").attr("selected",true);
+      $("textarea[name='auditcause']").focus();
+    });
+  }
+</script>
+</body>
+</html>
