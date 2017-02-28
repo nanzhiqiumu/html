@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+<!--在新窗口中打开：-->
+在新窗口中打开
+<select onchange="window.open(this.options[this.selectedIndex].value)" name="select"> 
+<option value="http://429006.com">Pop's Blog</option> 
+<option value="http://www.qq.com">Tencent</option> 
+<option value="http://www.google.com">Google</option> 
+</select> 
+
+<!--在当前窗口打开：-->
+在当前窗口打开
+<select onchange='document.location.href=this.options[this.selectedIndex].value;'> 
+<option value="http://429006.com">Pop's Blog</option> 
+<option value="http://www.qq.com">Tencent</option> 
+<option value="http://www.google.com">Google</option> 
+</select> 
+
+
+
+
+
+
+<!--select标签加链接方法1-->
+ 
+<SCRIPT language=javascript> 
+<!-- 
+// open the related site windows 
+function mbar(sobj) { 
+var docurl =sobj.options[sobj.selectedIndex].value; 
+if (docurl != "") { 
+open(docurl,'_blank'); 
+sobj.selectedIndex=0; 
+sobj.blur(); 
+} 
+} 
+//--> 
+</SCRIPT> 
+<Select onchange=mbar(this) name="select"> 
+<OPTION selected>=== 合作伙伴 ===</OPTION> 
+<OPTION value="http://www.baidu.com">百度</OPTION> 
+<OPTION value="http://www.163.com">网易</OPTION> 
+<OPTION value="http://www.flash8.net/">闪吧</OPTION> 
+</Select>
+
+ <!---------------------------------------------------------------------------------------------------------->
+
+
+<!--select标签加链接方法2--> 
+<select name="pageselect" onchange="self.location.href=options[selectedIndex].value" > 
+<OPTION value="http://www.baidu.com">百度</OPTION> 
+<OPTION value="http://www.163.com">网易</OPTION> 
+</select> 
+  
+<!---------------------------------------------------------------------------------------------------------->
+
+
+<!--select标签加链接方法3--> 
+<script type="text/javascript"> 
+function setsubmit() 
+{ 
+if(mylink.value == 0) 
+window.location='http://www.baidu.com'; 
+if(mylink.value == 1) 
+window.location='http://www.163.com'; 
+if(mylink.value == 2) 
+window.location='http://www.sina.com'; 
+} 
+</script> 
+</head> 
+<body> 
+<select name="mylink" id="mylink"> 
+<OPTION value="0">百度</OPTION> 
+<OPTION value="1">网易</OPTION> 
+<OPTION value="2">新浪</OPTION> 
+</select>  
+   
+    
+      
+</body>
+</html>
