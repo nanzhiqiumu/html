@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  background: #F5F5F5;
+  margin: 0;
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+}
+
+.col {
+  display: inline-block;
+  padding: 30px;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+.card:hover {
+  z-index: 50;
+}
+.card .material-icons {
+  line-height: 200px;
+  font-size: 100px;
+}
+.card .f-card {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  box-shadow: 0 0 0 #eee;
+  left: 0;
+  top: 0;
+  color: #555;
+  background: #fff;
+  z-index: 5;
+  -webkit-transition: ease-in 0.3s;
+  transition: ease-in 0.3s;
+}
+.card .b-card {
+  width: 200px;
+  height: 200px;
+  background: #eee;
+  color: #f53249;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px #ccc inset;
+}
+.card .b-card .material-icons {
+  -webkit-animation: bb 1s infinite;
+  animation: bb 1s infinite;
+}
+
+#model-1 .card:hover .f-card {
+  box-shadow: 2px 0 3px #eee;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+#model-2 .card:hover .f-card {
+  box-shadow: 2px 0 3px #eee;
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+#model-3 .card {
+  overflow: hidden;
+}
+#model-3 .card:hover .f-card {
+  box-shadow: 0 2px 3px #eee;
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+#model-4 .card {
+  overflow: hidden;
+}
+#model-4 .card:hover .f-card {
+  box-shadow: 2px 0 3px #eee;
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
+#model-5 .card {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+#model-5 .card .f-card {
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+#model-5 .card:hover .f-card {
+  box-shadow: 0 5px 10px #ddd;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+
+#model-6 .card {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+#model-6 .card .f-card {
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+#model-6 .card:hover .f-card {
+  box-shadow: 5px 0 10px #eee;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+#model-7 .card {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+#model-7 .card .f-card {
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+#model-7 .card:hover .f-card {
+  box-shadow: 0 -5px 10px #ddd;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+
+#model-8 .card {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+#model-8 .card .f-card {
+  -webkit-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+#model-8 .card:hover .f-card {
+  box-shadow: -5px 0 10px #eee;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+#model-9 .card {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+#model-9 .card .f-card {
+  -webkit-transform-origin: 100% 0 0;
+          transform-origin: 100% 0 0;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+#model-9 .card:hover .f-card {
+  box-shadow: -5px 0 10px #eee;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+#model-10 .card {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+#model-10 .card .f-card {
+  -webkit-transform-origin: 100% 100% 0;
+          transform-origin: 100% 100% 0;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+#model-10 .card:hover .f-card {
+  box-shadow: -5px 0 10px #eee;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+#model-11 .card {
+  -webkit-perspective: 1500px;
+          perspective: 1500px;
+  overflow: hidden;
+}
+#model-11 .card .f-card {
+  -webkit-transform-origin: 0 100% 0;
+          transform-origin: 0 100% 0;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+#model-11 .card:hover .f-card {
+  box-shadow: -5px 0 10px #eee;
+  -webkit-transform: rotateY(120deg);
+  transform: rotateY(120deg);
+}
+
+#model-12 .card {
+  -webkit-perspective: 2000px;
+          perspective: 2000px;
+  overflow: hidden;
+}
+#model-12 .card .f-card {
+  -webkit-transform-origin: 0 100% 0;
+          transform-origin: 0 100% 0;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+#model-12 .card:hover .f-card {
+  box-shadow: -5px 0 10px #eee;
+  -webkit-transform: rotateX(120deg);
+  transform: rotateX(120deg);
+}
+
+#model-13 .card .f-card {
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
+}
+#model-13 .card:hover .f-card {
+  box-shadow: none;
+  -webkit-transform: scale(0, 0);
+  transform: scale(0, 0);
+  visibility: hidden;
+}
+
+#model-14 .card {
+  -webkit-transform: rotateX(0);
+  transform: rotateX(0);
+  -webkit-transition: .2s ease-in;
+  transition: .2s ease-in;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 0%;
+          transform-origin: 50% 0%;
+}
+#model-14 .card .b-card {
+  position: absolute;
+  top: 100%;
+  -webkit-transition: .2s ease-in;
+  transition: .2s ease-in;
+  box-shadow: none;
+  left: 0;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 50% 0%;
+          transform-origin: 50% 0%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+#model-14 .card:hover {
+  -webkit-transform: rotateX(90deg);
+  transform: rotateX(90deg);
+}
+#model-14 .card:hover .b-card {
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+}
+
+#model-15 .card {
+  -webkit-transform: rotateY(0);
+  transform: rotateY(0);
+  -webkit-transition: .2s ease-in;
+  transition: .2s ease-in;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+}
+#model-15 .card .b-card {
+  position: absolute;
+  top: 0;
+  -webkit-transition: .2s ease-in;
+  transition: .2s ease-in;
+  box-shadow: none;
+  left: 100%;
+  -webkit-transform: rotateY(-90deg);
+  transform: rotateY(-90deg);
+  -webkit-transform-origin: 0 50%;
+          transform-origin: 0 50%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+#model-15 .card:hover {
+  -webkit-transform: rotateY(90deg);
+  transform: rotateY(90deg);
+}
+#model-15 .card:hover .b-card {
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+}
+
+#model-16 .card {
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transition: .2s ease-in;
+  transition: .2s ease-in;
+}
+#model-16 .card .f-card {
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+  z-index: auto;
+}
+#model-16 .card .b-card {
+  position: absolute;
+  top: 0;
+  box-shadow: none;
+  z-index: auto;
+  left: 0;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  visibility: hidden;
+}
+#model-16 .card:hover {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+#model-16 .card:hover .f-card {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+#model-16 .card:hover .b-card {
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+  visibility: visible;
+}
+
+#model-17 .card {
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  -webkit-transition: .2s ease-in;
+  transition: .2s ease-in;
+}
+#model-17 .card .f-card {
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+  z-index: auto;
+}
+#model-17 .card .b-card {
+  position: absolute;
+  top: 0;
+  box-shadow: none;
+  z-index: auto;
+  left: 0;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  visibility: hidden;
+}
+#model-17 .card:hover {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+#model-17 .card:hover .f-card {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+#model-17 .card:hover .b-card {
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+  visibility: visible;
+}
+
+#model-18 .card:hover .f-card {
+  opacity: 0;
+}
+@-webkit-keyframes bb {
+  0% , 100% {
+    -webkit-transform: scale(0.85, 0.85);
+    transform: scale(0.85, 0.85);
+  }
+  50% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+@keyframes bb {
+  0% , 100% {
+    -webkit-transform: scale(0.85, 0.85);
+    transform: scale(0.85, 0.85);
+  }
+  50% {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+	
+</style>
+</head>
+
+<body>
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<mashadinka></mashadinka>
+<div class="col" id="model-1">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-2">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-3">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-4">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-5">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-6">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-7">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-8">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-9">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-10">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-11">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-12">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-13">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-14">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-15">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-16">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-17">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+<div class="col" id="model-18">
+  <div class="card">
+    <div class="f-card"><i class="material-icons">fingerprint</i></div>
+    <div class="b-card"><i class="material-icons">favorite</i></div>
+  </div>
+</div>
+</body>
+</html>
